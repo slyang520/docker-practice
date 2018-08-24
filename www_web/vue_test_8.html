@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.bootcss.com/vue/2.4.4/vue.js"></script>
+    <script src="https://cdn.bootcss.com/vuex/2.4.0/vuex.js"></script>
+    <!-- 引入样式 -->
+    <link href="https://cdn.bootcss.com/element-ui/1.4.6/theme-default/index.css" rel="stylesheet">
+    <!-- 引入组件库 -->
+    <script src="https://cdn.bootcss.com/element-ui/1.4.6/index.js"></script>
+
+
+</head>
+<body>
+
+<div id="app">
+
+    <el-tree
+            :data="data2"
+            show-checkbox
+            ref="tree"
+            node-key="id"
+            :props="defaultProps">
+    </el-tree>
+
+
+    <button @click="getCheckedNodes">
+        点我获取    </button>
+
+</div>
+
+<!--:default-expanded-keys="[2, 3]"-->
+<!--:default-checked-keys="[5]"-->
+
+<script>
+
+    var app = new Vue({
+        el: '#app',
+
+        data: {
+            data2: [{
+                id: 1,
+                label: '一级 1',
+                children: [{
+                    id: 4,
+                    label: '二级 1-1',
+                    children: [{
+                        id: 9,
+                        label: '三级 1-1-1'
+                    }, {
+                        id: 10,
+                        label: '三级 1-1-2'
+                    }]
+                }]
+            }, {
+                id: 2,
+                label: '一级 2',
+                children: [{
+                    id: 5,
+                    label: '二级 2-1'
+                }, {
+                    id: 6,
+                    label: '二级 2-2'
+                }]
+            }, {
+                id: 3,
+                label: '一级 3',
+                children: [{
+                    id: 7,
+                    label: '二级 3-1'
+                }, {
+                    id: 8,
+                    label: '二级 3-2'
+                }]
+            }],
+            defaultProps: {
+                children: 'children',
+                label: 'label'
+            }
+        },
+
+        methods:{
+
+            getCheckedNodes:function(){
+                var checkNode = this.$refs.tree.getCheckedNodes();
+                var checkNode_ = checkNode.filter(function (item) {
+                    return item.children === null || item.children === undefined;
+                });
+                console.log(checkNode);
+                console.log(checkNode_);
+
+                var checkNodeId= checkNode_.map(function (item) {
+                     return item.id;
+                });
+                console.log("选中的ID：   "+checkNodeId);
+            }
+        }
+
+    });
+
+</script>
+
+</body>
+</html>

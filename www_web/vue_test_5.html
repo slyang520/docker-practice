@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.bootcss.com/vue/2.4.4/vue.js"></script>
+    <script src="https://cdn.bootcss.com/vuex/2.4.0/vuex.js"></script>
+    <!-- 引入样式 -->
+    <link href="https://cdn.bootcss.com/element-ui/1.4.6/theme-default/index.css" rel="stylesheet">
+    <!-- 引入组件库 -->
+    <script src="https://cdn.bootcss.com/element-ui/1.4.6/index.js"></script>
+
+</head>
+<body>
+
+<div id="app">
+
+
+</div>
+
+
+<script>
+
+    //    混合 (mixins)
+    // 定义一个混合对象
+    var myMixin = {
+        created: function () {
+            this.hello()
+        },
+        methods: {
+            hello: function () {
+                console.log('hello from mixin!')
+            }
+        },
+//        render: function (h) {
+//            return h('h1', 'hello vue');
+//        },
+        template: '<h1>holle vue mixin</h1>',
+    };
+    // 定义一个使用混合对象的组件
+    var Component = Vue.extend({
+        mixins: [myMixin]
+    });
+    var component = new Component(); // => "hello from mixin!"
+    //    component.$el='#app';
+    component.$mount('#app');
+
+</script>
+
+</body>
+</html>

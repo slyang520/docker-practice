@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <script src="https://cdn.bootcss.com/vue/2.4.4/vue.js"></script>
+    <!-- 引入样式 -->
+    <link href="https://cdn.bootcss.com/element-ui/1.4.6/theme-default/index.css" rel="stylesheet">
+    <!-- 引入组件库 -->
+    <script src="https://cdn.bootcss.com/element-ui/1.4.6/index.js"></script>
+
+</head>
+<body>
+
+<div id="app" class="parent">
+
+    <div ref="test"></div>
+
+    <div ref="test2"></div>
+
+    <child ref="test3"></child>
+
+    <el-row :gutter="20">
+        <el-col :span="6">
+            <div class="grid-content bg-purple">
+                <child ref="test4"></child>
+            </div>
+        </el-col>
+    </el-row>
+
+    <child>
+        <div ref="test5"></div>
+    </child>
+
+</div>
+
+<script>
+
+    Vue.component('child', {
+        template: [
+            '<div class="child">',
+            '<slot text="hello from childgfgfdgfd"></slot>',
+            '</div>'
+        ].join(' '),
+    });
+
+    var app = new Vue({
+        el: '#app',
+        data :function() {
+            return {
+
+            }
+        },
+        mounted: function () {
+            console.log( this.$refs)
+        },
+
+    });
+
+</script>
+
+</body>
+</html>

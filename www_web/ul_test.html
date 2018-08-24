@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <style type="text/css">
+        *{
+            /*去掉所有元素的边距*/
+            /*可以去掉ul 中 li 的左边距，使之美观*/
+            margin:0;
+            padding:0;
+        }
+        #div-box1{
+            width: 500px;
+            height: 600px;
+            border:1px solid silver;
+            margin:20px auto 0 auto;
+        }
+        #div-box1 .faceul{
+            width: 400px;
+            height: 550px;
+            /*使 ul 自动水平居中*/
+            margin:20px auto 0 auto;
+            border:1px solid green;
+        }
+        #div-box1 li{
+            /*去掉 li 前边的样式*/
+            list-style-type:none;
+            width: 60px;
+            height: 120px;
+            border:1px solid red;
+            /*为了让 li 放一排，使用左左浮动*/
+            float:left;
+            margin:50px 0 0 10px;
+        }
+        .faceul img{
+            width: 80px;
+            margin: 10px 0 0 10px;
+        }
+        .faceul span{
+            margin-left: 35px;
+            display: block;
+        }
+        .faceul a:link{
+            color:black;
+            text-decoration:none;
+        }
+        .faceul a:hover{
+            color:red;
+            text-decoration:underline;
+        }
+
+        div.wrap.lh {
+            height: 200px;
+            line-height: 200px;
+            overflow: hidden;
+            background-color: #ffccff;
+        }
+        /*如果内含图片, 并需要图片也居中, 请加上此句样式**/
+        div.wrap.lh img{
+            vertical-align: middle;
+        }
+
+
+    </style>
+
+</head>
+<body>
+
+<i style="display: inline-block;width: 50px;height: 50px;box-sizing: border-box;
+ background-color: #373737;
+ border-radius: 50%;
+ border:2px solid #ff6600;
+"></i>
+
+
+<div class="wrap lh">
+    <span style="color:red;">费卡
+    </span>就是快机费
+</div>
+
+
+<div id="div-box1">
+    <ul class="faceul">
+        <li><img src="union.jpg"><span><a href="#">宇宙</a></span></li>
+        <li><img src="union.jpg"><span><a href="#">宇宙</a></span></li>
+        <li><img src="union.jpg"><span><a href="#">宇宙</a></span></li>
+        <li><img src="union.jpg"><span><a href="#">宇宙</a></span></li>
+        <li><img src="union.jpg"><span><a href="#">宇宙</a></span></li>
+        <li><img src="union.jpg"><span><a href="#">宇宙</a></span></li>
+        <li><img src="union.jpg"><span><a href="#">宇宙</a></span></li>
+        <li><img src="union.jpg"><span><a href="#">宇宙</a></span></li>
+        <li><img src="union.jpg"><span><a href="#">宇宙</a></span></li>
+        <li><img src="union.jpg"><span><a href="#">宇宙</a></span></li>
+        <li><img src="union.jpg"><span><a href="#">宇宙</a></span></li>
+        <li><img src="union.jpg"><span><a href="#">宇宙</a></span></li>
+    </ul>
+</div>
+
+
+</body>
+</html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <script src="https://cdn.bootcss.com/vue/2.4.4/vue.js"></script>
+    <!-- 引入样式 -->
+    <link href="https://cdn.bootcss.com/element-ui/1.4.6/theme-default/index.css" rel="stylesheet">
+    <!-- 引入组件库 -->
+    <script src="https://cdn.bootcss.com/element-ui/1.4.6/index.js"></script>
+
+</head>
+<body>
+
+<div id="app" class="parent">
+    <child>
+        <template scope="props">
+            <p>hello from parent</p>
+            <p>{{ props.text }}</p>
+        </template>
+    </child>
+</div>
+
+
+<div id="app2" class="parent">
+    <my-awesome-list :items="items"  v-on:click.native="testClick">
+        <template slot="item" scope="props">
+            <li  class="my-fancy-item">{{ props.text }}</li>
+        </template>
+    </my-awesome-list>
+</div>
+
+<div id="app3">
+    <child2></child2>
+</div>
+
+<script>
+
+    Vue.component('child', {
+        template: [
+            '<div class="child">',
+            '<slot text="hello from childgfgfdgfd"></slot>',
+            '</div>'
+        ].join(' '),
+    });
+
+    Vue.component('my-awesome-list', {
+        props: ['items'],
+        template: [
+            '<ul>',
+            '<slot name="item" v-for="item in items" :text="item.text"></slot>',
+            '</ul>'
+        ].join(''),
+    });
+
+    Vue.component('child2', {
+        render: function (createElement) {
+            return createElement(
+                'h2',   // tag name 标签名称
+                this.$slots.default // 子组件中的阵列
+            )
+        },
+    });
+
+    var app = new Vue({
+        el: '#app',
+        data: {}
+    });
+
+    var app2 = new Vue({
+        el: '#app2',
+        data: {
+            items: [{
+                text: 'hello'
+            }, {
+                text: 'world'
+            }]
+        },
+        methods:{
+            testClick:function () {
+                alert('test');
+            }
+
+        }
+    });
+
+    var app3 = new Vue({
+        el: '#app3',
+    });
+
+
+</script>
+
+</body>
+</html>

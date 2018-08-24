@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <script src="https://cdn.bootcss.com/vue/2.4.4/vue.js"></script>
+    <!-- 引入样式 -->
+    <link href="https://cdn.bootcss.com/element-ui/1.4.6/theme-default/index.css" rel="stylesheet">
+    <!-- 引入组件库 -->
+    <script src="https://cdn.bootcss.com/element-ui/1.4.6/index.js"></script>
+
+    <script type="text/javascript" src="http://libs.baidu.com/jquery/1.7.0/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/FileSaver.js/2014-11-29/FileSaver.min.js"></script>
+    <script type="text/javascript" src="http://www.jq22.com/demo/exportWord20161214/js/jquery.wordexport.js"></script>
+
+</head>
+<body mar>
+
+<div id="app" v-bind:style="styleObject">
+
+    {{ message }}
+    <p v-bind:title="title" style="margin-left: 200px;color: #ff6600">点我title</p>
+    <p v-bind:title="title_1 + '    ' + title_2">点我title2</p>
+    <p v-bind:title="title_3()">点我title3</p>
+    <p v-bind:title="title_4">点我title4</p>
+    <p v-text="text"></p>
+    <p v-text="'今天是'+year+'年'+month+'月'"></p>
+    <input type="text" v-model="message"><br>
+    <p v-pre>{{message}}</p>
+    <p>{{aPlus}} </p>
+
+    <child-component>
+        <p>主要内容的一个fsdfsdfsdff段落。</p>
+        <p>另一个主fdsfsdfsdfds要段落。</p>
+        <p slot="footer">这里有一些联系信息</p>
+        <h1 slot="header">这里可能是一个页面标题</h1>
+    </child-component>
+
+    <el-table
+            :data="tableData"
+            border
+            style="width: 100%">
+        <el-table-column
+                fixed
+                prop="date"
+                label="日期"
+                width="150">
+        </el-table-column>
+        <el-table-column
+                prop="name"
+                label="姓名"
+                width="120">
+        </el-table-column>
+        <el-table-column
+                prop="province"
+                label="省份"
+                width="120">
+        </el-table-column>
+        <el-table-column
+                prop="city"
+                label="市区"
+                width="120">
+        </el-table-column>
+        <el-table-column
+                prop="address"
+                label="地址"
+                width="300">
+        </el-table-column>
+        <el-table-column
+                prop="zip"
+                label="邮编"
+                width="120">
+        </el-table-column>
+        <el-table-column
+                fixed="right"
+                label="操作"
+                width="100">
+
+            <template scope="scope">
+                <el-button @click="handleClick(scope.row,1)" type="text" size="small">查看</el-button>
+                <el-button @click="handleClick(scope.$index,1)" type="text" size="small">编辑</el-button>
+            </template>
+
+        </el-table-column>
+    </el-table>
+
+</div>
+
+<!-- http://www.jianshu.com/p/98dfa4c6389c -->
+
+<!-- v-if 元素直接从dom中消失  -->
+<!-- v-see 元素隐藏  display:none -->
+
+<!-- v-bind   -->
+<!--html属性不能使用双大括号形式绑定，只能使用v-bind指令-->
+
+<!-- v-text 绑定文字 -->
+
+<!-- v-model -->
+<!-- v-on  -->
+
+<script>
+
+    //     单个卡槽， 具名卡槽
+    Vue.component('child-component', {
+        template: [
+            '<div>',
+
+            '<slot name="header"></slot>',
+            '<div v-show="">I am Child</div>',
+            '<div>我是子组件的标题</div>',
+            '<slot>我是 SLOT。</slot>',
+            '<slot name="footer"></slot>',
+
+            '</div>'
+        ].join(' '),
+        data: function () {
+            return {
+                someChildProperty: true
+            }
+        }
+    });
+
+    var app = new Vue({
+        el: '#app',
+        watch: {
+//            firstName: function (val) {
+//                this.fullName = val + ' ' + this.lastName;
+//            },
+        },
+        data: {
+            styleObject: {
+                'background-color': '#593598'
+            },
+            a: 1,
+            message: 'Hello Vue!',
+            title: 'title content',
+            title_1: 'title 1',
+            title_2: 'title 2',
+            title_3: function () {
+                return this.title + this.title_1 + this.title_2;
+            },
+            title_4: {}, <!-- 绑定引用类型的   返回其 toString()方法 -->
+            text: 'hello-text',
+            year: new Date().getFullYear(),
+            month: new Date().getMonth() + 1,
+
+            tableData: [{
+                date: '2016-05-03',
+                name: '王小虎',
+                province: '上海',
+                city: '普陀区',
+                address: '上海市普陀区金沙江路 1518 弄',
+                zip: 200333
+            }, {
+                date: '2016-05-02',
+                name: '王小虎',
+                province: '上海',
+                city: '普陀区',
+                address: '上海市普陀区金沙江路 1518 弄',
+                zip: 200333
+            }, {
+                date: '2016-05-04',
+                name: '王小虎',
+                province: '上海',
+                city: '普陀区',
+                address: '上海市普陀区金沙江路 1518 弄',
+                zip: 200333
+            }, {
+                date: '2016-05-01',
+                name: '王小虎',
+                province: '上海',
+                city: '普陀区',
+                address: '上海市普陀区金沙江路 1518 弄',
+                zip: 200333
+            }]
+
+        },
+        computed: {
+            // 仅读取，值只须为函数
+            aDouble: function () {
+                return this.a * 2
+            },
+            // 读取和设置
+            aPlus: {
+                get: function () {
+                    console.log("@@@@:  get");
+                    return this.a + 1
+                },
+                set: function (v) {
+                    console.error("@@@@:" + v);
+                    this.a = v - 1
+                }
+            }
+        },
+        methods: {
+            plus: function () {
+                this.a++
+            },
+
+            handleClick: function (row, test) {
+                console.log("@@@@" + JSON.stringify(row));
+                console.log("@@@@" + test);
+
+                $("#app").wordExport("fileName");
+
+            },
+            testClick: function () {
+                alert('test');
+            }
+
+        }
+
+    });
+
+</script>
+
+</body>
+</html>

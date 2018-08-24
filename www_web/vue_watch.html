@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <script src="https://cdn.bootcss.com/vue/2.4.4/vue.js"></script>
+    <!-- 引入样式 -->
+    <link href="https://cdn.bootcss.com/element-ui/1.4.6/theme-default/index.css" rel="stylesheet">
+    <!-- 引入组件库 -->
+    <script src="https://cdn.bootcss.com/element-ui/1.4.6/index.js"></script>
+
+</head>
+<body>
+
+<div id="app" class="parent">
+    <el-dialog title="收货地址"
+               size="large"
+               :visible.sync="dialogTableVisible">
+    </el-dialog>
+</div>
+
+<script>
+
+    var app = new Vue({
+        el: '#app',
+        data: {
+            gridData: [{
+                date: '2016-05-02',
+                name: '王小虎',
+                address: '上海市普陀区金沙江路 1518 弄'
+            }, {
+                date: '2016-05-04',
+                name: '王小虎',
+                address: '上海市普陀区金沙江路 1518 弄'
+            }],
+            dialogTableVisible: false,
+            url: 'http://www.baidu.com'
+        },
+
+    });
+
+</script>
+
+</body>
+</html>

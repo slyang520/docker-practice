@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <script src="https://cdn.bootcss.com/vue/2.4.4/vue.js"></script>
+    <!-- 引入样式 -->
+    <link href="https://cdn.bootcss.com/element-ui/1.4.6/theme-default/index.css" rel="stylesheet">
+    <!-- 引入组件库 -->
+    <script src="https://cdn.bootcss.com/element-ui/1.4.6/index.js"></script>
+
+</head>
+<body>
+
+<div id="app" class="parent">
+
+    <el-table
+            :data="tableData"
+            border
+            style="width: 100%">
+        <el-table-column
+                prop="province"
+                label="省份">
+        </el-table-column>
+        <el-table-column
+                prop="city"
+                label="市区">
+        </el-table-column>
+        <el-table-column
+                fixed="right"
+                label="操作">
+            <template scope="scope">
+                <el-popover
+                        placement="right"
+                        width="50"
+                        trigger="click">
+                    <div><el-button
+                            @click="clickCell(scope.row)"
+                            size="mini" type="text">进项货物分析</el-button></div>
+                    <div><el-button
+                            @click="clickCell(scope.row)"
+                            size="mini" type="text">销项货物分析</el-button></div>
+                    <el-button
+                            size="mini"
+                            type="text"
+                            @click="clickCell(scope.row)"
+                            slot="reference">click 激活
+                    </el-button>
+                </el-popover>
+            </template>
+        </el-table-column>
+    </el-table>
+
+</div>
+
+
+<script>
+
+    var app = new Vue({
+        el: '#app',
+        data: {
+            visible2: false,
+            tableData: [{
+                date: '2016-05-03',
+                name: '王小虎',
+                province: '上海',
+                city: '普陀区',
+                address: '上海市普陀区金沙江路 1518 弄',
+                zip: 200333
+            }, {
+                date: '2016-05-02',
+                name: '王小虎',
+                province: '上海',
+                city: '普陀区',
+                address: '上海市普陀区金沙江路 1518 弄',
+                zip: 200333
+            }, {
+                date: '2016-05-04',
+                name: '王小虎',
+                province: '上海',
+                city: '普陀区',
+                address: '上海市普陀区金沙江路 1518 弄',
+                zip: 200333
+            }, {
+                date: '2016-05-01',
+                name: '王小虎',
+                province: '上海',
+                city: '普陀区',
+                address: '上海市普陀区金沙江路 1518 弄',
+                zip: 200333
+            }]
+        },
+        methods:{
+            clickCell:function (row) {
+                console.log(row);
+            },
+            popClick_1:function () {
+            },
+            popClick_2:function () {
+            },
+        }
+    });
+
+</script>
+
+</body>
+</html>

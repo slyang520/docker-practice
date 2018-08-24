@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <script src="https://cdn.bootcss.com/vue/2.4.4/vue.js"></script>
+    <script src="https://cdn.bootcss.com/vue-router/2.4.0/vue-router.js"></script>
+    <!-- 引入样式 -->
+    <link href="https://cdn.bootcss.com/element-ui/1.4.6/theme-default/index.css" rel="stylesheet">
+    <!-- 引入组件库 -->
+    <script src="https://cdn.bootcss.com/element-ui/1.4.6/index.js"></script>
+
+    <style>
+        .child-view {
+            position: absolute;
+            transition: all 3.5s cubic-bezier(.55, 0, .1, 1);
+        }
+
+        .slide-left-enter, .slide-right-leave-active {
+            opacity: 0;
+            -webkit-transform: translate(230px, 0);
+            transform: translate(230px, 0);
+        }
+
+        .slide-left-leave-active, .slide-right-enter {
+            opacity: 0;
+            -webkit-transform: translate(-30px, 0);
+            transform: translate(-30px, 0);
+        }
+    </style>
+
+</head>
+<body>
+
+<div id="app" class="parent">
+
+    <h1>Hello App!</h1>
+    <p>
+        <!-- 使用 router-link 组件来导航. -->
+        <!-- 通过传入 `to` 属性指定链接. -->
+        <!-- <router-link> 默认会被渲染成一个 `<a>` 标签 -->
+        <router-link to="/foo">Go to Foo</router-link>
+        <router-link to="/bar">Go to Bar</router-link>
+        <router-link to="/bar2?trun=1">Go to Bar</router-link>
+    </p>
+
+    <transition :name="transitionName">
+        <router-view class="child-view"></router-view>
+    </transition>
+
+</div>
+
+<script>
+
+    const Foo = {template: '<div style="background-color: #5c9896;width: 500px;height: 300px">foo</div>'}
+    const Bar = {template: '<div style="background-color: #ffccff;width: 500px;height: 300px">bar</div>'}
+    const Bar2 = {template: '<div style="background-color: #cccccc;width: 500px;height: 300px">trun bar</div>'}
+
+    const routes = [
+        {path: '/foo', component: Foo},
+        {path: '/bar', component: Bar},
+        {path: '/bar2', component: Bar2}
+    ]
+
+    const router = new VueRouter({
+        routes: routes
+    })
+
+    var app = new Vue({
+        router: router,
+        el: '#app',
+        data: function () {
+            return {
+                transitionName: 'slide-right'
+            }
+        },
+        watch: {
+            '$route': function (to, from) {
+                if (to.query.trun) {
+                    this.transitionName = 'slide-left';
+                } else {
+                    this.transitionName = 'slide-right';
+                }
+            }
+        },
+        methods: {}
+    });
+
+
+</script>
+
+</body>
+</html>
