@@ -1,0 +1,23 @@
+#doc
+#https://www.jianshu.com/p/2217cfed29d7?utm_campaign=haruki&utm_content=note&utm_medium=reader_share&utm_source=qq
+#https://yeasy.gitbooks.io/docker_practice/compose/usage.html
+
+# docker-compose -f docker-compose-hello.yml up -d  启动
+# docker-compose -f docker-compose-hello.yml down   关闭
+
+version: '3'
+services:
+  my_nginx:
+    build: ./nginx
+    image: slyang_nginx:123 # 指定了Dockerfile(build),为该镜像指定名字  没有直接用本地镜像或远程镜像
+    ports:
+     - "5000:80"
+    volumes:
+     - /Users/slyang/openSourceProject/web/baidu-school-2017/nginx/nginx_log:/var/log/nginx
+  my_nginx_2:
+    build: ./app_demo
+    image: slyang_nginx_2:123
+    ports:
+     - "5001:80"
+    depends_on:
+     - my_nginx
