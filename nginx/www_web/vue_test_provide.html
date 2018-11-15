@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <script src="https://cdn.bootcss.com/vue/2.4.4/vue.js"></script>
+    <!-- 引入样式 -->
+    <link href="https://cdn.bootcss.com/element-ui/1.4.6/theme-default/index.css" rel="stylesheet">
+    <!-- 引入组件库 -->
+    <script src="https://cdn.bootcss.com/element-ui/1.4.6/index.js"></script>
+
+
+</head>
+<body mar>
+
+<div id="app" v-bind:style="styleObject">
+    {{ message }}
+
+    <child-component>
+        <p>主要内容的一个fsdfsdfsdff段落。</p>
+        <p>另一个主fdsfsdfsdfds要段落。</p>
+        <p slot="footer">这里有一些联系信息</p>
+        <h1 slot="header">这里可能是一个页面标题</h1>
+    </child-component>
+</div>
+
+
+<script>
+
+    // vue provide
+
+    //     单个卡槽， 具名卡槽
+    Vue.component('child-component', {
+        template: [
+            '<div>',
+
+            '<slot name="header"></slot>',
+            '<div v-show="">I am Child</div>',
+            '<div>我是子组件的标题</div>',
+            '<slot>我是 SLOT。</slot>',
+            '<slot name="footer"></slot>',
+
+            '</div>'
+        ].join(' '),
+        data: function () {
+            return {
+                someChildProperty: true
+            }
+        },
+        inject: ['foo','footFuc','footFucWithParam'], // 注入父  方法
+        mounted: function () {
+            console.info(this.foo) // => "bar"
+            this.footFuc();
+            this.footFucWithParam('helo test');
+        },
+    });
+
+    var app = new Vue({
+        el: '#app',
+        provide: {
+            foo: 'bar',
+            footFuc:function(){
+                console.log("hello foot fun");
+            },
+            footFucWithParam:function(test){
+                console.log("hello foot fun"+test);
+            }
+        },
+        data: {
+            styleObject: {
+                'background-color': '#eee'
+            },
+            message: 'Hello Vue!',
+            title: 'title content',
+
+        },
+        methods: {
+            testClick: function () {
+                alert('test');
+            }
+
+        }
+
+    });
+
+</script>
+
+</body>
+</html>
