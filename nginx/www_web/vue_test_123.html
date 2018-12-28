@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <script src="https://cdn.bootcss.com/vue/2.4.4/vue.js"></script>
+    <!-- 引入样式 -->
+    <link href="https://cdn.bootcss.com/element-ui/1.4.6/theme-default/index.css" rel="stylesheet">
+    <!-- 引入组件库 -->
+    <script src="https://cdn.bootcss.com/element-ui/1.4.6/index.js"></script>
+
+
+</head>
+<body mar>
+
+<div id="app" v-bind:style="styleObject">
+
+    <div v-for="item in data_test">
+
+        <div v-if="item.CONTENT && item.CONTENT.length>0">
+            <div v-for="(item_inner,index) in item.CONTENT">
+                <div v-if="index==0">
+                    <span>content todo</span>
+                </div>
+                <div>
+                    <span>content AND</span>
+                </div>
+            </div>
+        </div>
+
+        <div v-else>
+            <span>content OR</span>
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+    Vue.component('child-component', {
+        template: [
+            '<div>',
+
+            '<slot name="header"></slot>',
+            '<div v-show="">I am Child</div>',
+            '<div>我是子组件的标题</div>',
+            '<slot>我是 SLOT。</slot>',
+            '<slot name="footer"></slot>',
+
+            '</div>'
+        ].join(' '),
+        data: function () {
+            return {
+                someChildProperty: true
+            }
+        },
+        inject: ['foo','footFuc','footFucWithParam'], // 注入父  方法
+        mounted: function () {
+            console.info(this.foo) // => "bar"
+            this.footFuc();
+            this.footFucWithParam('helo test');
+        },
+    });
+
+
+    var app = new Vue({
+        name: 'slyang',
+        el: '#app',
+        data: {
+            data_test: [
+                {
+                    "CONTENT": [
+                        {
+                            "field_cn": "用户角色1",
+                            "field_en": "user_role",
+                            "type": "IN",
+                            "field_input": null,
+                            "CONTENT": []
+                        },
+                        {
+                            "field_cn": "访问方式",
+                            "field_en": "user_role",
+                            "type": "IN",
+                            "field_input": null
+                        }
+                    ]
+                },
+                {
+                    "field_cn": "用户角色1",
+                    "field_en": "user_role",
+                    "type": "IN",
+                    "field_input": null
+                },
+                {
+                    "field_cn": "访问方式",
+                    "field_en": "user_role",
+                    "type": "IN",
+                    "field_input": null
+                }
+            ]
+        },
+        methods: {}
+
+    });
+
+</script>
+
+</body>
+</html>

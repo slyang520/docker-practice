@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.bootcss.com/vue/2.4.4/vue.js"></script>
+
+    <style>
+        .bg_parent {
+            background: #f4c69c;
+            margin-bottom: 10px;
+        }
+    </style>
+
+</head>
+<body >
+
+<div id="app">
+    <div v-on:click="testClick('parent')" class="bg_parent">
+        <button v-on:click="testClick('child')">i am child</button>
+    </div>
+
+    <!--  子点击生效 父不生效  -->
+    <div v-on:click="testClick('parent')" class="bg_parent">
+        <button v-on:click.stop="testClick('child')">i am child  (stop in child)</button>
+    </div>
+
+</div>
+
+
+<script>
+//        .stop
+//        .prevent
+//        .capture
+//        .self
+//        .once
+//        .passive
+
+
+    var app = new Vue({
+        el: '#app',
+        created: function () {
+        },
+        data: {
+        },
+        methods: {
+            testClick: function (msg) {
+                alert(msg);
+            }
+        }
+
+    });
+
+</script>
+
+</body>
+</html>
